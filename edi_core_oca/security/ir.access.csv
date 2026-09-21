@@ -1,5 +1,5 @@
 id,name,model_id,group_id/id,operation,domain
-rule_edi_exchange_record_user,Assigned EDI exchange records,edi_core_oca.model_edi_exchange_record,base.group_user,crud,"['|', ('model', '!=', False), ('res_id', '=', 0)]"
-rule_edi_exchange_record_manager,Manager EDI exchange records,edi_core_oca.model_edi_exchange_record,base_edi.group_edi_manager,crud,"[(1, '=', 1)]"
-rule_edi_exchange_record_multi_company,edi_exchange_record multi-company,model_edi_exchange_record,,crud,"['|',('company_id','=',False),('company_id', 'in', company_ids)]"
-rule_edi_backend_multi_company,edi_backend multi-company,model_edi_backend,,crud,"['|',('company_id','=',False),('company_id', 'in', company_ids)]"
+rule_edi_exchange_record_user,Assigned EDI exchange records,edi.exchange.record,base.group_user,crud,"['|', ('model', '!=', False), ('res_id', '=', 0)]"
+rule_edi_exchange_record_manager,Manager EDI exchange records,edi.exchange.record,base_edi.group_edi_manager,crud,"[(1, '=', 1)]"
+rule_edi_exchange_record_multi_company,edi_exchange_record multi-company,edi.exchange.record,,crud,"['|',('company_id','=',False),('company_id', 'in', company_ids)]"
+rule_edi_backend_multi_company,edi_backend multi-company,edi.backend,,crud,"['|',('company_id','=',False),('company_id', 'in', company_ids)]"
