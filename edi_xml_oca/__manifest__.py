@@ -7,7 +7,7 @@
     "summary": """
         Base module for EDI exchange using XML files.
     """,
-    "version": "18.0.1.0.2",
+    "version": "20.0.1.0.2",
     "development_status": "Alpha",
     "license": "LGPL-3",
     "author": "ACSONE,Camptocamp,Odoo Community Association (OCA)",

@@ -1,7 +1,7 @@
 {
     "name": "EDI Sale Stock",
     "summary": "Configuration and special behaviors for EDI on sales & stock.",
-    "version": "18.0.1.0.0",
+    "version": "20.0.1.0.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "maintainers": ["ivantodorovich"],
     "website": "https://github.com/OCA/edi-framework",

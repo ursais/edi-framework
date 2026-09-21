@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
-    TODO: no update.
--->
 <odoo>
     <template
         id="qwb_tmpl_ubl_order_response_out"
         name="Render UBL OrderResponse out - EXAMPLE"
     >
-        <OrderResponse
-            xmlns="urn:oasis:names:specification:ubl:schema:xsd:OrderResponse-2"
+        <OrderResponse xmlns="urn:oasis:names:specification:ubl:schema:xsd:OrderResponse-2"
             xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
             xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
         >
@@ -19,21 +15,21 @@
                 schemeAgencyID="BII"
                 schemeID="Profile"
             >urn:www.cenbii.eu:profile:BIIXYZ:ver1.0</cbc:ProfileID>
-            <cbc:ID t-esc="info.get('cbc:ID', record.client_order_ref)" />
-            <cbc:UUID t-esc="info.get('cbc:UUID', exchange_record.identifier)" />
+            <cbc:ID t-out="info.get('cbc:ID', record.client_order_ref)" />
+            <cbc:UUID t-out="info.get('cbc:UUID', exchange_record.identifier)" />
             <cbc:IssueDate
-                t-esc="date_to_string(record.date_order)"
+                t-out="date_to_string(record.date_order)"
             >2010-01-21</cbc:IssueDate>
             <cbc:IssueTime
-                t-esc="time_to_string(record.date_order)"
+                t-out="time_to_string(record.date_order)"
             >12:30:00</cbc:IssueTime>
             <cbc:OrderResponseCode
                 t-if="record.edi_state_id"
-                t-esc="record.edi_state_id.code"
+                t-out="record.edi_state_id.code"
             />
-            <cbc:Note t-esc="record.note" />
+            <cbc:Note t-out="record.note" />
             <cbc:DocumentCurrencyCode
-                t-esc="record.currency_id.name"
+                t-out="record.currency_id.name"
             >EUR</cbc:DocumentCurrencyCode>
             <!--
                 FIXME: don't know why adding this breaks validation like
@@ -42,27 +38,23 @@
 
                 which makes no sense since according to XSD the order is correct.
 
-                <cac:LineCountNumeric t-esc="len(record.order_line)" />
+                <cac:LineCountNumeric t-out="len(record.order_line)" />
             -->
             <t t-set="order_ref_info" t-value="info.get('cac:OrderReference', {})" />
             <cac:OrderReference>
                 <cbc:ID
-                    t-esc="order_ref_info.get('cbc:ID', record.client_order_ref)"
+                    t-out="order_ref_info.get('cbc:ID', record.client_order_ref)"
                 >XYZ123</cbc:ID>
-                <cbc:SalesOrderID t-esc="record.name">SO1234</cbc:SalesOrderID>
+                <cbc:SalesOrderID t-out="record.name">SO1234</cbc:SalesOrderID>
             </cac:OrderReference>
             <cac:SellerSupplierParty>
-                <t t-call="edi_sale_ubl_output_oca.qweb_tmpl_ubl_party">
-                    <t t-set="party" t-value="seller_party" />
-                </t>
+                <t t-call="edi_sale_ubl_output_oca.qweb_tmpl_ubl_party" party="seller_party"/>
             </cac:SellerSupplierParty>
             <cac:BuyerCustomerParty>
-                <t t-call="edi_sale_ubl_output_oca.qweb_tmpl_ubl_party">
-                    <t t-set="party" t-value="buyer_party" />
-                </t>
+                <t t-call="edi_sale_ubl_output_oca.qweb_tmpl_ubl_party" party="buyer_party"/>
             </cac:BuyerCustomerParty>
             <cac:Delivery>
-                <cbc:ID t-esc="delivery.name" />
+                <cbc:ID t-out="delivery.name" />
                 <t
                     t-set="uoms"
                     t-value="delivery.move_line_ids.mapped('product_uom_id')"
@@ -78,38 +70,36 @@
                 <cbc:Quantity
                     t-if="uom"
                     t-att-unitCode="uom.unece_code if 'unece_code' in uom._fields else 'C62'"
-                    t-esc="total_qty"
+                    t-out="total_qty"
                 >1.0</cbc:Quantity>
                 <cbc:ActualDeliveryDate
-                    t-esc="date_to_string(record.commitment_date)"
+                    t-out="date_to_string(record.commitment_date)"
                 />
                 <cbc:ActualDeliveryTime
-                    t-esc="time_to_string(record.commitment_date)"
+                    t-out="time_to_string(record.commitment_date)"
                 />
                 <cac:DeliveryAddress t-if="delivery.partner_id">
-                    <t t-call="edi_sale_ubl_output_oca.qweb_tmpl_ubl_address">
-                        <t t-set="partner" t-value="delivery.partner_id" />
-                    </t>
+                    <t t-call="edi_sale_ubl_output_oca.qweb_tmpl_ubl_address" partner="delivery.partner_id"/>
                 </cac:DeliveryAddress>
                 <cac:RequestedDeliveryPeriod>
                     <cbc:StartDate
-                        t-esc="date_to_string(record.commitment_date)"
+                        t-out="date_to_string(record.commitment_date)"
                     >2010-02-10</cbc:StartDate>
                     <cbc:EndDate
-                        t-esc="date_to_string(record.commitment_date)"
+                        t-out="date_to_string(record.commitment_date)"
                     >2010-02-25</cbc:EndDate>
                 </cac:RequestedDeliveryPeriod>
             </cac:Delivery>
             <cac:TaxTotal>
                 <cbc:TaxAmount
                     t-att-currencyID="record.currency_id.name"
-                    t-esc="record.amount_tax"
+                    t-out="record.amount_tax"
                 />
             </cac:TaxTotal>
             <cac:LegalMonetaryTotal>
                 <cbc:PayableAmount
                     t-att-currencyID="record.currency_id.name"
-                    t-esc="record.amount_total"
+                    t-out="record.amount_total"
                 />
             </cac:LegalMonetaryTotal>
             <t t-foreach="record.order_line" t-as="line">
@@ -117,28 +107,28 @@
                     <cbc:SubstitutionStatusCode />
                     <cbc:Note />
                     <cac:LineItem>
-                        <cbc:ID t-esc="line.edi_id">1</cbc:ID>
+                        <cbc:ID t-out="line.edi_id">1</cbc:ID>
                         <cbc:SalesOrderID />
-                        <cbc:UUID t-esc="line.id" />
+                        <cbc:UUID t-out="line.id" />
                         <cbc:Note />
                         <!-- TODO -->
                         <cbc:LineStatusCode
                             listAgencyID="UBL"
                             listName="Line Status"
                             t-att-name="line.edi_state_id.name"
-                            t-esc="line.edi_state_id.code"
+                            t-out="line.edi_state_id.code"
                         />
                         <cbc:Quantity
                             t-att-unitCode="line.product_uom.unece_code if 'unece_code' in line.product_uom._fields else 'C62'"
-                            t-esc="line.product_uom_qty"
+                            t-out="line.product_uom_qty"
                         >1</cbc:Quantity>
                         <cbc:LineExtensionAmount
                             t-att-currencyID="record.currency_id.name"
-                            t-esc="line.price_subtotal"
+                            t-out="line.price_subtotal"
                         />
                         <cbc:TotalTaxAmount
                             t-att-currencyID="record.currency_id.name"
-                            t-esc="line.price_tax"
+                            t-out="line.price_tax"
                         />
                         <!--
                             Dynamic support for commitment dates at line level.
@@ -149,10 +139,10 @@
                         >
                             <cac:RequestedDeliveryPeriod>
                                 <cbc:StartDate
-                                    t-esc="date_to_string(line.commitment_date)"
+                                    t-out="date_to_string(line.commitment_date)"
                                 >2010-02-10</cbc:StartDate>
                                 <cbc:EndDate
-                                    t-esc="date_to_string(line.commitment_date)"
+                                    t-out="date_to_string(line.commitment_date)"
                                 >2010-02-25</cbc:EndDate>
                             </cac:RequestedDeliveryPeriod>
                         </cac:Delivery>
@@ -164,20 +154,20 @@
                             <cbc:BaseQuantity>1</cbc:BaseQuantity>
                         </cac:Price>
                         <cac:Item>
-                            <cbc:Description t-esc="line.name" />
+                            <cbc:Description t-out="line.name" />
                             <cac:SellersItemIdentification>
                                 <cbc:ID
-                                    t-esc="line.product_id.default_code or line.product_id.barcode"
+                                    t-out="line.product_id.default_code or line.product_id.barcode"
                                 />
                             </cac:SellersItemIdentification>
                             <!--
                                 TODO: use main_seller_id.product_code
                             <cac:ManufacturersItemIdentification>
-                                <cbc:ID t-esc="line.product_id.default_code"/>
+                                <cbc:ID t-out="line.product_id.default_code"/>
                             </cac:ManufacturersItemIdentification>
                             -->
                             <cac:StandardItemIdentification>
-                                <cbc:ID t-esc="line.product_id.barcode" />
+                                <cbc:ID t-out="line.product_id.barcode" />
                             </cac:StandardItemIdentification>
                             <t
                                 t-foreach="line.tax_id"
@@ -187,10 +177,10 @@
                                 <cac:ClassifiedTaxCategory
                                     t-if="tax.unece_categ_code and tax.unece_type_code"
                                 >
-                                    <cbc:ID t-esc="tax.unece_categ_code" />
-                                    <cbc:Name t-esc="tax.name" />
+                                    <cbc:ID t-out="tax.unece_categ_code" />
+                                    <cbc:Name t-out="tax.name" />
                                     <cac:TaxScheme>
-                                        <cbc:ID t-esc="tax.unece_type_code" />
+                                        <cbc:ID t-out="tax.unece_type_code" />
                                     </cac:TaxScheme>
                                 </cac:ClassifiedTaxCategory>
                             </t>

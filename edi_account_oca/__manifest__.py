@@ -5,7 +5,7 @@
     "name": "Account Listeners",
     "summary": """
         Define some component listeners for Account Moves""",
-    "version": "18.0.1.1.1",
+    "version": "20.0.1.1.1",
     "license": "LGPL-3",
     "author": "Dixmit,Odoo Community Association (OCA)",
     "maintainers": ["etobella"],

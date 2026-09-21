@@ -243,25 +243,25 @@
                 <filter
                     string="Created today"
                     name="filter_created_today"
-                    domain="[('create_date','&gt;=',  context_today().strftime('%%Y-%%m-%%d 00:00:00'))]"
+                    domain="[('create_date', '&gt;=', 'now')]"
                     help="Show all records created today"
                 />
                 <filter
                     string="Created last 7 days"
                     name="filter_created_last_week"
-                    domain="[('create_date','&gt;=',  (context_today() - datetime.timedelta(days=7)).strftime('%%Y-%%m-%%d'))]"
+                    domain="[('create_date', '&gt;=', '-7d')]"
                     help="Show all records created in the last 7 days"
                 />
                 <filter
                     string="Exchanged today"
                     name="filter_exchanged_today"
-                    domain="[('exchanged_on','&gt;=', context_today().strftime('%%Y-%%m-%%d 00:00:00'))]"
+                    domain="[('exchanged_on', '&gt;=', 'now')]"
                     help="Show all records created today"
                 />
                 <filter
                     string="Exchanged last 7 days"
                     name="filter_exchanged_last_week"
-                    domain="[('exchanged_on','&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%%Y-%%m-%%d'))]"
+                    domain="[('exchanged_on', '&gt;=', '-7d')]"
                     help="Show all records created in the last 7 days"
                 />
                 <separator />

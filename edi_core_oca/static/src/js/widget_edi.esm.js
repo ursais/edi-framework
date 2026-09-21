@@ -1,6 +1,8 @@
+import { usePlugin } from "@odoo/owl";
 import {registry} from "@web/core/registry";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useService} from "@web/core/utils/hooks";
+import { ActionManagerPlugin } from "@web/webclient/actions/action_plugin";
 
 const {Component} = owl;
 
@@ -9,7 +11,7 @@ export class EdiConfigurationWidget extends Component {
     async setup() {
         super.setup();
         this.orm = useService("orm");
-        this.action = useService("action");
+        this.action = usePlugin(ActionManagerPlugin);
     }
     async onClick(ev, rule) {
         ev.preventDefault();

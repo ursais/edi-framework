@@ -8,7 +8,7 @@
     "summary": """
     Integrates EDI Storage with Queue
     """,
-    "version": "18.0.1.0.0",
+    "version": "20.0.1.0.0",
     "development_status": "Beta",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/edi-framework",

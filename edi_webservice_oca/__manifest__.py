@@ -5,13 +5,13 @@
     "name": "EDI WebService",
     "summary": """
         Defines webservice integration from EDI Exchange records""",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "development_status": "Beta",
     "author": "Dixmit, Camptocamp, Odoo Community Association (OCA)",
     "maintainers": ["etobella", "simahawk"],
     "website": "https://github.com/OCA/edi-framework",
     "depends": ["edi_component_oca", "webservice"],
-    "data": ["views/edi_backend.xml", "security/ir.model.access.csv"],
+    "data": ["views/edi_backend.xml", "security/ir.access.csv"],
     "demo": ["demo/edi_backend.xml"],
 }

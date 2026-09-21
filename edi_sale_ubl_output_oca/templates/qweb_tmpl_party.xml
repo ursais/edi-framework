@@ -15,19 +15,19 @@
                 <t t-if="party.endpoint">
                     <cbc:EndpointID
                         t-att="party.endpoint.attrs"
-                        t-esc="party.endpoint.value"
+                        t-out="party.endpoint.value"
                     >7302347231111</cbc:EndpointID>
                 </t>
                 <t t-foreach="party.identifiers" t-as="identifier">
                     <cac:PartyIdentification>
                         <cbc:ID
                             t-att="identifier.attrs"
-                            t-esc="identifier.value"
+                            t-out="identifier.value"
                         >7300070011115</cbc:ID>
                     </cac:PartyIdentification>
                 </t>
                 <cac:PartyName t-if="party.name">
-                    <cbc:Name t-esc="party.name">Moderna Produkter AB</cbc:Name>
+                    <cbc:Name t-out="party.name">Moderna Produkter AB</cbc:Name>
                 </cac:PartyName>
             </cac:Party>
         </nswrapper>
@@ -38,11 +38,11 @@
             xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
             xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
         >
-            <cbc:StreetName t-if="partner.street" t-esc="partner.street" />
-            <cbc:CityName t-if="partner.city" t-esc="partner.city" />
-            <cbc:PostalZone t-if="partner.zip" t-esc="partner.zip" />
+            <cbc:StreetName t-if="partner.street" t-out="partner.street" />
+            <cbc:CityName t-if="partner.city" t-out="partner.city" />
+            <cbc:PostalZone t-if="partner.zip" t-out="partner.zip" />
             <cac:AddressLine t-if="partner.street2">
-                <cbc:Line t-if="partner.street2" t-esc="partner.street2" />
+                <cbc:Line t-if="partner.street2" t-out="partner.street2" />
             </cac:AddressLine>
             <cac:Country t-if="partner.country_id">
                 <cbc:IdentificationCode t-field="partner.country_id" />

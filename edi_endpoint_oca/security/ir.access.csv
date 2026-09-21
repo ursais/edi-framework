@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_edi_endpoint_edit,edi_endpoint edit,model_edi_endpoint,base_edi.group_edi_manager,crud,
+edi_endpoint_multi_company_rule,EDI Endpoint Multi-company,model_edi_endpoint,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"

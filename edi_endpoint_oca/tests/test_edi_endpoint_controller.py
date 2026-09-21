@@ -25,7 +25,7 @@ class EDIEndpointHttpCase(HttpCase, EDIEndpointTestMixin):
 
     def tearDown(self):
         # Clear routing cache so each test starts clean
-        self.env.registry.clear_cache("routing")
+        self.env.transaction.invalidate_ormcache("routing")
         super().tearDown()
 
     def _make_request(self, route, headers=None, data=None):

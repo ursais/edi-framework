@@ -21,13 +21,10 @@ class EDIState(models.Model):
     )
     is_default = fields.Boolean()
 
-    _sql_constraints = [
-        (
-            "state_workflow_code_uniq",
-            "unique(code, workflow_id)",
-            "Code must be unique per each workflow.",
-        )
-    ]
+    _state_workflow_code_uniq = models.Constraint(
+        'unique(code, workflow_id)',
+        "Code must be unique per each workflow.",
+    )
 
     @api.constrains("is_default")
     def _check_is_default(self):
